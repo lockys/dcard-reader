@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Dcard reader
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To start this project, use following command.
+```
+# cd to the project root folder 
+$ npm start
+```
 
-## Available Scripts
+This project is bootstrapped using CRA. 
 
-In the project directory, you can run:
+# Structure
+```
+├── express
+│   └── app.js
+├── src
+│   ├── App.js
+│   ├── axios-instance.js
+│   ├── container
+│   │   ├── Dcard.js 
+│   │   └── Dcard.module.css
+│   ├── hooks
+│   │   └── useAxios.js 
+│   ├── index.css
+│   └── index.js
+└── package.json
+```
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `axios-instance.js` is the file for setting up the default settings of axios instance so that we don't need 
+  to append the url prefix each time when we use it.
+- `container/Dcard.js` is the main file where the infinite scrolling logic locates. In this file, the posts array from
+  Dcard API is rendered as a list. And we observe the last element of the post lists using built-in web API `IntersectionObserver(callback)` to detect if the last element of the lists is visible so that the program will call API again to fetch the next pagination of posts.
+- `hooks/useAxios.js` is a custom hook holding the logic of fetching data using GET and managing some other states like loading, error.
+- the `app.js` under express folder is used to deal with the cors issue when directly calling the Dcard API from browser.
